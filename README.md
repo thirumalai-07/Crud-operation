@@ -1,1 +1,36 @@
-# Crud-operation
+# Crud-operationclass UserService {
+
+    private val users = mutableListOf<User>()
+
+    // CREATE
+    fun createUser(user: User) {
+        users.add(user)
+    }
+
+    // READ (all)
+    fun getAllUsers(): List<User> {
+        return users
+    }
+
+    // READ (by id)
+    fun getUserById(id: Int): User? {
+        return users.find { it.id == id }
+    }
+
+    // UPDATE
+    fun updateUser(id: Int, name: String, email: String): Boolean {
+        val user = getUserById(id)
+        return if (user != null) {
+            user.name = name
+            user.email = email
+            true
+        } else {
+            false
+        }
+    }
+
+    // DELETE
+    fun deleteUser(id: Int): Boolean {
+        return users.removeIf { it.id == id }
+    }
+}
